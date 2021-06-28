@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE94DF0A2688E4B00097ED5F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE94DF092688E4B00097ED5F /* HeaderView.swift */; };
 		AEAA163F2688C359008CCF25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA163E2688C359008CCF25 /* AppDelegate.swift */; };
 		AEAA16412688C359008CCF25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA16402688C359008CCF25 /* SceneDelegate.swift */; };
 		AEAA16432688C359008CCF25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA16422688C359008CCF25 /* ViewController.swift */; };
@@ -15,6 +16,8 @@
 		AEAA164B2688C360008CCF25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAA16492688C360008CCF25 /* LaunchScreen.storyboard */; };
 		AEAA16562688C361008CCF25 /* CollectionViewTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA16552688C361008CCF25 /* CollectionViewTestTests.swift */; };
 		AEAA16612688C361008CCF25 /* CollectionViewTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA16602688C361008CCF25 /* CollectionViewTestUITests.swift */; };
+		AEAA16722688C503008CCF25 /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA16712688C503008CCF25 /* MyCollectionViewController.swift */; };
+		AEAA16772688C927008CCF25 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA16762688C927008CCF25 /* MyCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE94DF092688E4B00097ED5F /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		AEAA163B2688C359008CCF25 /* CollectionViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAA163E2688C359008CCF25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEAA16402688C359008CCF25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 		AEAA165C2688C361008CCF25 /* CollectionViewTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectionViewTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAA16602688C361008CCF25 /* CollectionViewTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTestUITests.swift; sourceTree = "<group>"; };
 		AEAA16622688C361008CCF25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AEAA16712688C503008CCF25 /* MyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
+		AEAA16762688C927008CCF25 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +85,7 @@
 		AEAA16322688C359008CCF25 = {
 			isa = PBXGroup;
 			children = (
+				AE94DF092688E4B00097ED5F /* HeaderView.swift */,
 				AEAA163D2688C359008CCF25 /* CollectionViewTest */,
 				AEAA16542688C361008CCF25 /* CollectionViewTestTests */,
 				AEAA165F2688C361008CCF25 /* CollectionViewTestUITests */,
@@ -103,6 +110,8 @@
 				AEAA16402688C359008CCF25 /* SceneDelegate.swift */,
 				AEAA16422688C359008CCF25 /* ViewController.swift */,
 				AEAA16442688C359008CCF25 /* Main.storyboard */,
+				AEAA16712688C503008CCF25 /* MyCollectionViewController.swift */,
+				AEAA16762688C927008CCF25 /* MyCollectionViewCell.swift */,
 				AEAA16472688C360008CCF25 /* Assets.xcassets */,
 				AEAA16492688C360008CCF25 /* LaunchScreen.storyboard */,
 				AEAA164C2688C360008CCF25 /* Info.plist */,
@@ -258,6 +267,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEAA16722688C503008CCF25 /* MyCollectionViewController.swift in Sources */,
+				AE94DF0A2688E4B00097ED5F /* HeaderView.swift in Sources */,
+				AEAA16772688C927008CCF25 /* MyCollectionViewCell.swift in Sources */,
 				AEAA16432688C359008CCF25 /* ViewController.swift in Sources */,
 				AEAA163F2688C359008CCF25 /* AppDelegate.swift in Sources */,
 				AEAA16412688C359008CCF25 /* SceneDelegate.swift in Sources */,
