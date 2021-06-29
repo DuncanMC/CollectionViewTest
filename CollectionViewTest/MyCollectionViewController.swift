@@ -11,12 +11,12 @@ private let reuseIdentifier = "Cell"
 
 
 struct CellData: Hashable {
+    var value: Int = 0
     let index: Int
     let section: Int
     let title: String
     var rowTotal: Int = 0
     var columnTotal: Int = 0
-    var value: Int = 0
 
     static func == (lhs: CellData, rhs: CellData) -> Bool {
         return lhs.index == rhs.index && lhs.section == rhs.section
@@ -120,7 +120,16 @@ class MyCollectionViewController: UICollectionViewController {
             return UIColor(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
         }
     }
+    func compareCellData(atIndexPath indexPath: IndexPath, dataIn: CellData, dataFromModel: CellData) {
+        if dataIn.value != dataFromModel.value ||
+            dataIn.rowTotal != dataFromModel.rowTotal ||
+            dataIn.columnTotal != dataFromModel.columnTotal {
+            print("At \(indexPath)")
+            print(" data  in: \(dataIn)")
+            print(" model   : \(dataFromModel)")
+        }
 
+    }
     func makeDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: collectionView,
@@ -132,7 +141,8 @@ class MyCollectionViewController: UICollectionViewController {
                 let sectionData = self.sections[indexPath.section]
                 let cellDataFromModel = sectionData.items[indexPath.row]
 
-                let cellDataToUse = cellDataIn // Try using the model data given to the cellProvider closure
+                let cellDataToUse = cellDataFromModel // Try using the model data given to the cellProvider closure
+                self.compareCellData(atIndexPath: indexPath, dataIn: cellDataIn, dataFromModel: cellDataFromModel)
                 myCell.titleLabel.text = cellDataToUse.title
                 myCell.valueLabel.text = String(cellDataToUse.value)
                 myCell.rowTotalLabel.text = String(cellDataToUse.rowTotal)
@@ -181,7 +191,7 @@ extension MyCollectionViewController {
         ) {
             sections[indexPath.section].items[index].columnTotal += 1
             let item = sections[indexPath.section].items[index]
-                items.insert(item)
+            items.insert(item)
         }
         // MARK: - Create a new snapshot or use the old one?
         if useNewSnapshot {
@@ -192,7 +202,7 @@ extension MyCollectionViewController {
         // MARK: -
 
         snapshot.reloadItems(Array(items))
-        dataSource.apply(snapshot)
+        self.dataSource.apply(snapshot)
     }
 }
 
