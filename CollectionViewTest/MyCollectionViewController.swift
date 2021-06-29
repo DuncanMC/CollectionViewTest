@@ -43,6 +43,7 @@ struct Section: Hashable {
 }
 class MyCollectionViewController: UICollectionViewController {
 
+    var useNewSnapshot = true
     let gridColumns = 3
     public typealias SupplementaryViewProvider = (UICollectionView, String, IndexPath) -> UICollectionReusableView?
 
@@ -92,13 +93,17 @@ class MyCollectionViewController: UICollectionViewController {
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
 
-    func applySnapshot(animatingDifferences: Bool = true) {
+    func newSnapshot() -> Snapshot {
         var snapshot = Snapshot()
         snapshot.appendSections(sections)
         sections.forEach { section in
             snapshot.appendItems(section.items, toSection: section)
         }
-        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+        return snapshot
+    }
+
+    func applySnapshot(animatingDifferences: Bool = true) {
+        dataSource.apply(newSnapshot(), animatingDifferences: animatingDifferences)
     }
 
     func fizzBuzzColorFor(value: Int) -> UIColor {
@@ -119,20 +124,22 @@ class MyCollectionViewController: UICollectionViewController {
     func makeDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: collectionView,
-            cellProvider: { (collectionView, indexPath, CellData) -> UICollectionViewCell? in
+            cellProvider: { (collectionView, indexPath, cellDataIn) -> UICollectionViewCell? in
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: "cell",
                     for: indexPath)
                 guard let myCell = cell as? MyCollectionViewCell else { return cell }
                 let sectionData = self.sections[indexPath.section]
-                let cellData = sectionData.items[indexPath.row]
-                myCell.titleLabel.text = cellData.title
-                myCell.valueLabel.text = String(cellData.value)
-                myCell.rowTotalLabel.text = String(cellData.rowTotal)
-                myCell.columnTotalLabel.text = String(cellData.columnTotal)
-                myCell.valueStackView.backgroundColor = self.fizzBuzzColorFor(value: cellData.value)
-                myCell.rowTotalStackView.backgroundColor = self.fizzBuzzColorFor(value: cellData.rowTotal)
-                myCell.columnTotalStackView.backgroundColor = self.fizzBuzzColorFor(value: cellData.columnTotal)
+                let cellDataFromModel = sectionData.items[indexPath.row]
+
+                let cellDataToUse = cellDataIn // Try using the model data given to the cellProvider closure
+                myCell.titleLabel.text = cellDataToUse.title
+                myCell.valueLabel.text = String(cellDataToUse.value)
+                myCell.rowTotalLabel.text = String(cellDataToUse.rowTotal)
+                myCell.columnTotalLabel.text = String(cellDataToUse.columnTotal)
+                myCell.valueStackView.backgroundColor = self.fizzBuzzColorFor(value: cellDataToUse.value)
+                myCell.rowTotalStackView.backgroundColor = self.fizzBuzzColorFor(value: cellDataToUse.rowTotal)
+                myCell.columnTotalStackView.backgroundColor = self.fizzBuzzColorFor(value: cellDataToUse.columnTotal)
                 return cell
             })
         dataSource.supplementaryViewProvider = { [weak self] collectionView, elementKind, indexPath in
@@ -156,7 +163,7 @@ class MyCollectionViewController: UICollectionViewController {
 
 extension MyCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var snapshot = dataSource.snapshot()
+        var snapshot: Snapshot
 
 
         sections[indexPath.section].items[indexPath.row].value += 1
@@ -176,6 +183,14 @@ extension MyCollectionViewController {
             let item = sections[indexPath.section].items[index]
                 items.insert(item)
         }
+        // MARK: - Create a new snapshot or use the old one?
+        if useNewSnapshot {
+            snapshot = newSnapshot()
+        } else {
+            snapshot = dataSource.snapshot()
+        }
+        // MARK: -
+
         snapshot.reloadItems(Array(items))
         dataSource.apply(snapshot)
     }
